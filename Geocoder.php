@@ -39,7 +39,7 @@ class Geocoder {
 		$result['lng'] = $api_scrape->results[0]->geometry->location->lng;
 	
 		if ( $simple ) {
-			return $result;
+			return (object)$result;
 		}
 
 		$result['formatted_address'] = $api_scrape->results[0]->formatted_address;
@@ -54,7 +54,7 @@ class Geocoder {
 		$result['bounds']['southwest']['lng'] = $api_scrape->results[0]->geometry->bounds->southwest->lng;
 		$result['bounds']['northeast']['lat'] = $api_scrape->results[0]->geometry->bounds->northeast->lat;
 		$result['bounds']['northeast']['lng'] = $api_scrape->results[0]->geometry->bounds->northeast->lng;
-		return $result;
+		return (object)$result;
 	}
 
 	/*
