@@ -10,6 +10,7 @@ if ( isset( $_GET['location'] ) ) {
 ?>
 
 <!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>Geocoder</title>
@@ -24,7 +25,7 @@ if ( isset( $_GET['location'] ) ) {
 	<label>Enter a location to geocode</label><br>
 	<input type="text" name="location"><br>
 	<input type="checkbox" name="simple" value="true">
-	<label>Simple geocoding</label><br>
+	<label>Simple geocoding (only return location)</label><br>
 	<input type="submit" value="Geocode">
 </form>
 
