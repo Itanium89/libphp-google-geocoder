@@ -43,7 +43,8 @@ class Geocoder {
 		}
 
 		$result['formatted_address'] = $api_scrape->results[0]->formatted_address;
-		$result['raw'] = $api_scrape->results;
+		$result['result_count'] = count( $response->results );
+		$result['raw_results'] = $response->results;
 
 		$result['viewport']['southwest']['lat'] = $api_scrape->results[0]->geometry->viewport->southwest->lat;
 		$result['viewport']['southwest']['lng'] = $api_scrape->results[0]->geometry->viewport->southwest->lng;
