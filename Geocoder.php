@@ -13,7 +13,7 @@ class Geocoder {
 	 * Geocodes a location
 	 * 
 	 * This will return a Stdclass object if the location is successfully geocoded
-	 * The object will contain the properties `lat`, `lng`, `formatted_address`, `viewport` `bounds` and `raw`
+	 * The object will contain the properties `lat`, `lng`, `formatted_address`, `result_count`, `viewport` `bounds` and `raw_results`
 	 * lat: latitude for the first returned location
 	 * lng: longitude for the first returned location
 	 * viewport: viewport for the first returned location
