@@ -13,12 +13,10 @@ class Geocoder {
 	 * Geocodes a location
 	 * 
 	 * This will return a Stdclass object if the location is successfully geocoded
-	 * The object will contain the properties `lat`, `lng`, `location`, `formatted_address`, `result_count`, `viewport` `bounds` and `raw_results`
+	 * The object will contain the properties `lat`, `lng`, `location`, `formatted_address`, `result_count`, and `raw_results`
 	 * lat: latitude for the first returned location
 	 * lng: longitude for the first returned location
 	 * location: The location that was geocoded
-	 * viewport: viewport for the first returned location
-	 * bounds: bounds for the first returned location
 	 * raw: the entire response
 	 * formatted_address: formatted address for the first returned location
 	 *
@@ -49,15 +47,6 @@ class Geocoder {
 		$result['result_count'] = count( $api_scrape->results );
 		$result['raw_results'] = $api_scrape->results;
 
-		$result['viewport']['southwest']['lat'] = $api_scrape->results[0]->geometry->viewport->southwest->lat;
-		$result['viewport']['southwest']['lng'] = $api_scrape->results[0]->geometry->viewport->southwest->lng;
-		$result['viewport']['northeast']['lat'] = $api_scrape->results[0]->geometry->viewport->northeast->lat;
-		$result['viewport']['northeast']['lng'] = $api_scrape->results[0]->geometry->viewport->northeast->lng;
-
-		$result['bounds']['southwest']['lat'] = $api_scrape->results[0]->geometry->bounds->southwest->lat;
-		$result['bounds']['southwest']['lng'] = $api_scrape->results[0]->geometry->bounds->southwest->lng;
-		$result['bounds']['northeast']['lat'] = $api_scrape->results[0]->geometry->bounds->northeast->lat;
-		$result['bounds']['northeast']['lng'] = $api_scrape->results[0]->geometry->bounds->northeast->lng;
 		return (object)$result;
 	}
 
