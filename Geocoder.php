@@ -30,8 +30,8 @@ class Geocoder {
 	 * @param boolean $simple If true on the lat/lng will be returned
 	 * @return StdClass|String
 	 */
-	public function geocode( $location, $simple=false ) {
-		$api_scrape = $this->scrapeAPI( $location );
+	public static function geocode( $location, $simple=false ) {
+		$api_scrape = self::scrapeAPI( $location );
 
 		if ( !$api_scrape ) {
 			return false;
@@ -46,8 +46,8 @@ class Geocoder {
 		}
 
 		$result['formatted_address'] = $api_scrape->results[0]->formatted_address;
-		$result['result_count'] = count( $response->results );
-		$result['raw_results'] = $response->results;
+		$result['result_count'] = count( $api_scrape->results );
+		$result['raw_results'] = $api_scrape->results;
 
 		$result['viewport']['southwest']['lat'] = $api_scrape->results[0]->geometry->viewport->southwest->lat;
 		$result['viewport']['southwest']['lng'] = $api_scrape->results[0]->geometry->viewport->southwest->lng;
@@ -67,7 +67,7 @@ class Geocoder {
 	 * @param string $url URL to scrape
 	 * @return String|False
 	 */
-	private function scrape( $url ) {
+	private static function scrape( $url ) {
 		if ( ini_get( 'allow_url_fopen' ) ) {
 			return file_get_contents( $url );
 		}
@@ -90,9 +90,9 @@ class Geocoder {
 	 * @param string $location Location to geocode
 	 * @return StdClass|String
 	 */
-	private function scrapeAPI( $location ) {
+	private static function scrapeAPI( $location ) {
 		$url = sprintf( "http://maps.google.com/maps/api/geocode/json?address=%s&sensor=false", urlencode( $location ) );
-		$response = json_decode( $this->scrape( $url ) );
+		$response = json_decode( self::scrape( $url ) );
 		if ( $response->status != 'OK' ) {
 			return $response->status;
 		}
