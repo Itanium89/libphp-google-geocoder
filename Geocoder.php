@@ -31,7 +31,7 @@ class Geocoder {
 	public static function geocode( $location, $simple=false ) {
 		$api_scrape = self::scrapeAPI( $location );
 
-		if ( !$api_scrape ) {
+		if ( !$api_scrape instanceof StdClass ) {
 			return false;
 		}
 
