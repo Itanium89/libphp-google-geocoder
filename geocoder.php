@@ -103,3 +103,4 @@ class Geocoder {
 	}
 }
 closelog();
+?>
