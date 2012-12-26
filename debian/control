@@ -1,0 +1,12 @@
+Source: libphp-google-geocoder
+Section: web
+Priority: extra
+Maintainer: Olivier TASSEL <olivier@websolus.fr>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
+
+Package: libphp-google-geocoder
+Architecture: all
+Depends: php5 | php5-cli
+Description: Google geocode PHP library
+ Google geocode PHP library
