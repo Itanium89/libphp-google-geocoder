@@ -1,3 +1,9 @@
+libphp-google-geocoder (0.1-001) stable; urgency=low
+
+  * Améliorations majeures
+
+ -- Olivier TASSEL <olivier@websolus.fr>  Thu, 27 Dec 2012 16:46:00 +0100
+
 libphp-google-geocoder (0.0-002) stable; urgency=low
 
   * Corrections mineures

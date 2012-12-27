@@ -1,18 +1,11 @@
 <?php
-
 /**
  * Geocoder class for getting lat/lng coordinates of a location
  *
  * This uses Google's geocoding API
  * @link http://code.google.com/apis/maps/documentation/geocoding/
  */
-
-define('APPLICATION', 'libphp-google-geocoder');
-
-openlog(APPLICATION, LOG_PID | LOG_PERROR, LOG_LOCAL0);
-
 class Geocoder {
-
 	/**
 	 * Geocodes a location
 	 * 
@@ -27,7 +20,25 @@ class Geocoder {
 	 * If an error occurred it will be returned
 	 *
 	 * @link http://code.google.com/apis/maps/documentation/geocoding/
-	 *
+	 */
+	private $application = 'libphp-google-geocoder';
+
+	function __construct() {
+		openlog($this->application, LOG_PID | LOG_PERROR, LOG_LOCAL0);
+		try {
+			if (extension_loaded('newrelic')) { 
+				newrelic_set_appname($this->application);
+			}
+			else {
+				throw new Exception("Newrelic not installed");
+			}
+		}
+		catch (Exception $e) {
+			syslog(LOG_NOTICE, '('.get_current_user().') ['. __FILE__.':'.$e->getLine().'] '. $e->getMessage());
+		}
+	}
+
+	/** 
 	 * @param string $location Location to geocode
 	 * @param boolean $simple If true on the lat/lng will be returned
 	 * @return StdClass|String
@@ -66,7 +77,7 @@ class Geocoder {
 			curl_setopt( $curl, CURLOPT_URL, $url );
 			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, 1 );
 			curl_setopt( $curl, CURLOPT_HEADER, 0);
-			$data = curl_exec($url);
+			$data = curl_exec($curl);
 			if (curl_errno($curl) != 0) {
 				return FALSE;
 				throw new Exception(curl_error($curl));
@@ -97,10 +108,14 @@ class Geocoder {
 			else {
 				return $response;
 			}
+		}
 		catch(Exception $e) {
 			syslog(LOG_WARNING, '('.get_current_user().') ['. __FILE__.':'.$e->getLine().'] '. $e->getMessage());
 		}
 	}
+
+	function __destruct() {
+		closelog();
+	}
 }
-closelog();
 ?>
