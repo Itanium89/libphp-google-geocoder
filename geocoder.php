@@ -24,10 +24,11 @@ class Geocoder {
 	private $application = 'libphp-google-geocoder';
 
 	function __construct() {
-		openlog($this->application, LOG_PID | LOG_PERROR, LOG_LOCAL0);
+		openlog($this->application, LOG_PID, LOG_LOCAL7);
 		try {
 			if (extension_loaded('newrelic')) { 
 				newrelic_set_appname($this->application);
+				newrelic_background_job(true);
 			}
 			else {
 				throw new Exception("Newrelic not installed");
