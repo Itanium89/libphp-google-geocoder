@@ -1,0 +1,19 @@
+{
+	"name" : "otassel/libphp-ggeocoder",
+	"description" : "A PHP Class for Google Geocoder API",
+	"type" : "project",
+	"authors" : [{
+			"name" : "Olivier TASSEL",
+			"role" : "Developer"
+		}
+	],
+	"license" : [
+		"GPL-3.0+"
+	],
+	"require" : {
+		"php" : ">=5.3.0"
+	},
+    "autoload": {
+        "classmap": ["ggeocoder.class.php"]
+    }
+}
